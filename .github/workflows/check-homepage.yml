@@ -1,0 +1,21 @@
+# .github/workflows/check-homepage.yml
+name: Check Homepage Status
+
+on:
+  schedule:
+    - cron: '0 7 * * *'  # Jeden Tag um 07:00 UTC
+  workflow_dispatch:      # Manuell auslösbar
+
+jobs:
+  check-website:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if website is online
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://demo.maibros.com)
+          if [ "$STATUS" -ne 200 ]; then
+            echo "Website offline! Status code: $STATUS"
+            exit 1
+          else
+            echo "Website online. Status code: $STATUS"
+          fi
