@@ -1,5 +1,5 @@
 # .github/workflows/check-homepage.yml
-name: Check Homepage Status
+name: Demo Online
 
 on:
   schedule:
